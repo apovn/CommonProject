@@ -11,11 +11,15 @@ public class MainFactory {
         String filename = Paths.get(".").toAbsolutePath().normalize().toString() + "/test.txt";
         System.out.println("Output: " + filename);
 
-//        C1: factory method design pattern
+//        C1: many algorithm, each algorithm generate a Creator (Encryptor) to initialize a algorithm.
         PersistedFile file = new PersistedFile(filename, "Hello, world!", new Sha256Encryptor());
         file.persist();
 
-//        C2: just test only, it's not belong to Factory method design pattern
+//        C2: generate one Factory to initialize all algorithm.
+        EncryptionAlgorithm subEng = EncryptionFactory.getEncryptionAlgorithmm("256");
+        System.out.println("Encryption output: " + subEng.encrypt("Hello, world!"));
+
+//        Note: Before Factory method dp, just test only, it's not belong to Factory method design pattern
 //        doBusiness(filename, "Hello, world!", "256");
     }
 
